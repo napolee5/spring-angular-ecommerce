@@ -1,0 +1,172 @@
+body{
+  background-color: rgb(255, 255, 255)
+}
+/* === Sezione Chi siamo === */
+.Chisiamo {
+  position: relative;
+  display: flex;
+  flex-direction: column;   /* mette i figli uno sotto l'altro */
+  align-items: center;      /* centra orizzontalmente i figli */
+  justify-content: center;  /* centra verticalmente (se vuoi) */
+  width: 100%;
+  font-family: system-ui;
+}
+
+.Chisiamo img {
+  width: 100%;               /* solo 80% della larghezza */
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.Chisiamo .testo {
+  position: absolute;       /* rimane sopra l'immagine */
+  width: 100%;               /* stessa larghezza dell'immagine */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* centra il contenuto orizzontalmente */
+  justify-content: center;  /* centra verticalmente */
+  text-align: center;
+  color: azure;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+
+.Chisiamo .testo p {
+    background-color: rgba(4, 4, 4, 0.519);
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+
+.titolo-prodotti{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+/* === Sidebar === */
+.sidebar {
+  background-color: #f85d03;
+  width: 100%;
+  max-width: 200px; 
+  border: 1px solid #0000007a;
+  border-radius: 4%;   
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Bottoni delle categorie */
+.sidebar button, .card-actions button {
+  display: block;
+  width: 100%;         /* prende tutta la larghezza della sidebar */
+  margin: 10px 0;      /* spazio sopra e sotto */
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  text-align: center;  /* centra il testo */
+}
+
+.sidebar input{
+  width: 100%;
+}
+
+.sidebar button:hover, .card-actions button:hover {
+  background-color: #ddd;
+}
+
+.ricerca{
+  display: flex;
+  align-items: center;
+}
+
+.ricerca button{
+  padding: 4px;
+  width: 25%;
+}
+
+
+label{
+  display: flex;
+  justify-content: center;
+}
+
+/* Contenitore principale: sidebar + prodotti affiancati */
+.home-prodotti{
+  display: flex;
+  align-items: flex-start;
+
+  /* centra il blocco complessivo nella pagina */
+  max-width: 1200px;     /* cambia in base a quanto “larga” vuoi la sezione */
+  margin: 0 auto;
+
+  /* margini laterali respirati */
+  padding: 0 24px;
+
+  /* distanza fissa tra sidenav e lista prodotti */
+  gap: 32px;
+}
+
+.lista-prodotti {
+  width: 100%;
+}
+
+
+/* Card: occupa l’altezza totale della colonna */
+.card {
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.329);                   /* fa crescere la card per allinearsi alle altre */
+}
+
+/* Immagine della card: dimensione costante e ritaglio proporzionato */
+.card-img-top {
+  width: 100%;
+  aspect-ratio: 4 / 3;  /* oppure 1 / 1 per quadrate */
+  height: auto;         /* importante */
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+
+/* Sezione testo nella card (titolo, descrizione, prezzo) */
+.card-info {
+  flex: 1;                        /* occupa tutto lo spazio libero a sinistra */
+}
+
+/* Area con input + bottone (a destra nella card) */
+.card-actions {
+  display: flex;                  /* layout flessibile per input e bottone */
+  flex-direction: column;         /* input sopra, bottone sotto */
+  align-items: flex-end;          /* allinea input e bottone a destra */
+  margin-left: 1rem;              /* separazione dal blocco testo */
+}
+
+/* Stile input quantità */
+.card-actions input {
+  width: 90px;                    /* larghezza fissa dell’input */
+  margin-bottom: 0.5rem;          /* distanza sotto l’input (prima del bottone) */
+}
+
+.toast-custom {
+  position: fixed;                 /* sopra tutta la pagina */
+  top: 50%;                        /* verticale al centro */
+  left: 50%;                       /* orizzontale al centro */
+  transform: translate(-50%, -50%);/* correzione centro reale */
+  
+  background: #f85d03;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem; 
+  
+}
+

@@ -1,0 +1,212 @@
+<div class="contenitore">
+
+  <h2 *ngIf="listaordini.length === 0">
+    Attualmente non hai effettuato nessun ordine
+  </h2>
+
+  <div *ngIf="listaordini.length > 0">
+
+    <table class="table table-striped table-hover align-middle">
+
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Data</th>
+          <th>Totale</th>
+          <th>Stato</th>
+          <th>Indirizzo</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let ord of listaordini">
+
+          <td>
+            {{ ord.id }}
+          </td>
+          <td>
+            {{ ord.time | date:'dd/MM/yyyy HH:mm:ss' }}
+          </td>
+          <td>
+            {{ ord.total | currency:'EUR' }}
+          </td>
+
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-warning text-dark': ord.orderStatus === 'ORDINE_CONFERMATO',
+                'bg-primary': ord.orderStatus === 'SPEDITO',
+                'bg-success': ord.orderStatus === 'CONSEGNATO',
+                'bg-danger': ord.orderStatus === 'CANCELLATO'
+              }">
+
+              {{ ord.orderStatus }}
+
+            </span>
+          </td>
+
+          <td>
+            <div>
+              <b>{{ ord.region }}</b>,
+              <b>{{ ord.province }}</b>,
+              {{ ord.city }}
+            </div>
+
+            <small>
+              {{ ord.address }}
+            </small>
+          </td>
+
+          <td class="azioni">
+
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              data-bs-toggle="modal"
+              [attr.data-bs-target]="'#modalOrdine' + ord.id">
+
+              Vedi prodotti
+
+            </button>
+
+            <button
+              class="btn btn-danger btn-sm"
+              [disabled]="!canDelete(ord)"
+              (click)="deleteOrder(ord)">
+
+              Cancella
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div *ngFor="let ord of listaordini">
+
+  <div
+    class="modal fade"
+    [id]="'modalOrdine' + ord.id"
+    tabindex="-1"
+    [attr.aria-labelledby]="'modalOrdineLabel' + ord.id"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+
+      <div class="modal-content">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+
+          <h1
+            class="modal-title fs-5"
+            [id]="'modalOrdineLabel' + ord.id">
+
+            Dettaglio ordine #{{ ord.id }}
+
+          </h1>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal">
+          </button>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="modal-body">
+
+          <div
+            class="card mb-3"
+            *ngFor="let prod of ord.orderItems">
+
+            <div class="row g-0">
+
+              <!-- IMMAGINE -->
+              <div class="col-md-4">
+
+                <img
+                  [src]="prod.product.image"
+                  class="img-fluid rounded-start h-100 object-fit-cover"
+                  [alt]="prod.product.name">
+
+              </div>
+
+              <!-- INFO -->
+              <div class="col-md-8">
+
+                <div class="card-body">
+
+                  <h5 class="card-title">
+                    {{ prod.product.name }}
+                  </h5>
+
+                  <p class="card-text">
+                    {{ prod.product.description }}
+                  </p>
+
+                  <div class="d-flex justify-content-between align-items-center">
+
+                    <span>
+                      <b>QTA:</b> {{ prod.quantity }}
+                    </span>
+
+                    <span>
+                      {{ prod.product.price | currency:'EUR' }}
+                    </span>
+
+                  </div>
+
+                  <hr>
+
+                  <p class="fw-bold text-end">
+
+                    Totale:
+                    {{ prod.price | currency:'EUR' }}
+
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="modal-footer">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal">
+
+            Chiudi
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

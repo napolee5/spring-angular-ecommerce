@@ -1,0 +1,62 @@
+footer{
+    background-color: rgb(248 93 3);
+}
+
+.logo-luogo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-luogo img{
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.dove{
+    display: flex;
+    flex-direction: column;
+}
+
+.social-nav{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.sezione1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sezione1 img{
+    width: 32px;
+    height: 32px;
+}
+
+.social {
+    display: flex;
+    gap: 25px;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.navigazione{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
+}
+
+.navigazione a{
+    color: black;
+    text-decoration: none;
+}
+
+.metodi ul{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}

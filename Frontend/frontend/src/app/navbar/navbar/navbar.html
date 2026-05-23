@@ -1,0 +1,14 @@
+<nav class='navbar'>
+    <div class="navbar-left">
+    <a href="#"><img src="assets/logo.png" alt="logo"></a> <h1>Agrinfruit</h1>
+    </div>
+    <div class="navbar-right">
+    <button [routerLink]="['/profile/myOrder']"><img src="assets/iconOrder.svg" alt="Order"></button>
+    <button [routerLink]="['/profile/myCart']" ><img src="assets/iconCart.svg" alt="Cart"></button>
+    <button [routerLink]="['/profile/myCredential']"><img src="assets/iconProfile.svg" alt="Profilo"></button>
+    <button [routerLink]="['/login']" *ngIf="!isLogged()"><img src="assets/iconLogin.svg" alt="Login"></button>
+    <button (click)="logout()" *ngIf="isLogged()">
+        <img src="assets/iconLogout.svg" alt="Logout">
+    </button>
+    </div>
+</nav>

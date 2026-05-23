@@ -1,0 +1,60 @@
+
+<div class="carrello-prod">
+
+    <h3> Carrello </h3>
+
+    <div class="insieme-prodotti">
+        <div class="card mb-3" style="max-width: 540px; margin: auto;" *ngFor="let prod of listaProdotti">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img [src]="prod.product.image" class="img-fluid rounded-start">
+                </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"> {{ prod.product.name }}</h5>
+                    <p class="card-text"> {{ prod.product.description }}</p>
+                    <span class="card-qta"> Quantità: {{ prod.quantity }}</span>
+                    <span class="card-price"> {{ prod.product.price | currency:'EUR' }}</span>
+                    <p class="totale">Totale prodotto: {{prod.price | currency:'EUR'}}</p>
+                    <div class="button-part">
+                        <input #qty type="number" min="10" max="100" step="10" placeholder="kg"> <button type="submit" (click)="editProduct(prod.product,qty.valueAsNumber)">Modifica</button>
+                        <button style="margin: 10px;" (click)="deleteProduct(prod.product.id)">ELimina prodotto</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkout">
+        <h5> Il totale del tuo ordine è: {{carrello?.grandTotal | currency:'EUR'}} </h5>
+        <button *ngIf="!showForm && carrello?.items?.length" (click)="showForm = true">
+            Checkout
+        </button>
+    
+        <form *ngIf="showForm" (ngSubmit)="checkoutAndPay()">
+    
+            <select [(ngModel)]="region" name="region" (change)="onRegionChange()" required>
+                <option value="">Seleziona Regione</option>
+                <option *ngFor="let r of regions" [value]="r">{{ r }}</option>
+            </select>
+
+            <select [(ngModel)]="province" name="province" (change)="onProvinceChange()" required>
+                <option value="">Seleziona Provincia</option>
+                <option *ngFor="let p of provinces" [value]="p">{{ p }}</option>
+            </select>
+
+            <select [(ngModel)]="city" name="city" required>
+                <option value="">Seleziona comune</option>
+                <option *ngFor="let c of cities" [value]="c">{{ c }}</option>
+            </select>
+
+            <input type="text" [(ngModel)]="address" minlength="5" name="address" placeholder="Indirizzo" required>
+    
+            <button type="submit">Conferma</button>
+        </form>
+
+    </div>
+
+
+</div>
