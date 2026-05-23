@@ -113,3 +113,27 @@ spring.datasource.password=password
 ```
 
 ---
+
+# Configurazione Backend
+
+Prima di avviare il backend è necessario configurare il file:
+
+```text
+application-local.properties
+```
+
+Inserire le credenziali PostgreSQL, la secret key JWT e le credenziali email.
+
+Esempio:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/database
+spring.datasource.username=postgres
+spring.datasource.password=password
+
+jwt.secret=your_secret_key
+
+spring.mail.username=email@gmail.com
+spring.mail.password=password
+```
+
