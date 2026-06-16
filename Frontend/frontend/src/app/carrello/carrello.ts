@@ -10,6 +10,7 @@ import { Product } from '../models/product.model';
 import { OrderRequest } from '../models/order-request.models';
 import { Footer } from "../footer/footer";
 import { HttpClient } from '@angular/common/http';
+import { ToastService } from '../service/toast-service';
 
 @Component({
   selector: 'app-carrello',
@@ -19,9 +20,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Carrello implements OnInit {
 
-  constructor(private cartservice: CartService, private router: Router, private http: HttpClient) {}
+  constructor(private cartservice: CartService, private router: Router,
+     private http: HttpClient, public toastservice: ToastService) {}
 
-  data: any = {}
+  data: any = {};
+  errorMsg='';
 
   regions: string[] = [];
   provinces: string[] = [];
@@ -62,8 +65,7 @@ export class Carrello implements OnInit {
 
   this.cities = []
 
-  this.provinces =
-    Object.keys(this.data[this.region])
+  this.provinces = Object.keys(this.data[this.region]);
 
 }
 
@@ -88,10 +90,10 @@ onProvinceChange(): void {
       next: (data: Cart) => {
         this.carrello = data;                 
         this.listaProdotti = data.items;
-        console.log('Carrello è:', data);
       },
       error: err => {
-        console.error('Errore nel caricamento carrello:', err);
+        this.errorMsg = err.error.message;
+        this.toastservice.showToast(this.errorMsg);
       }
     });
   }
@@ -104,7 +106,8 @@ onProvinceChange(): void {
        console.log('Carrello è:', newCart);
       },
       error: err => {
-        console.error('Errore nel caricamento carrello:', err);
+        this.errorMsg = err.error.message;
+        this.toastservice.showToast(this.errorMsg);
       }
     })
   }
@@ -140,9 +143,8 @@ onProvinceChange(): void {
         this.router.navigateByUrl('/profile/myOrder');
       },
       error: (err) => {
-      // Errore → lo gestisco, mostro messaggio
         console.error(err);
-        alert('Pagamento fallito');
+        this.toastservice.showToast("Pagamento Fallito");
       }
     });
   }

@@ -68,7 +68,7 @@ Dal campo alla tavola, portiamo sulla tua cucina il gusto autentico dei nostri p
       </div>
     </div>
   </div>
-  <div class="toast-custom" *ngIf="toastVisible">
-              {{ toastMessage }}
-            </div>
+    <div *ngIf="toastService.toastVisible" class="toast-custom">
+        {{ toastService.toastMessage }}
+    </div>
 </div>

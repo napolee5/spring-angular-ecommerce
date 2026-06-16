@@ -170,8 +170,10 @@ export class LoginComponent {
         this.errorMsg = '';
       },
 
-      error: () => {
-
+      error: (err) => {
+        console.log(err);
+    console.log(err.error);
+    console.log(err.status);
         this.errorMsg = 'Errore invio email';
       }
     });

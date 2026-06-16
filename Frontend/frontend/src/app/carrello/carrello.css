@@ -42,3 +42,17 @@ button:hover {
   background-color: #ddd;
 
 }
+
+.toast-custom {
+  position: fixed;                 /* sopra tutta la pagina */
+  top: 50%;                        /* verticale al centro */
+  left: 50%;                       /* orizzontale al centro */
+  transform: translate(-50%, -50%);/* correzione centro reale */
+  
+  background: #f80303;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem; 
+  
+}

@@ -17,7 +17,8 @@ import { OrderStatus } from '../models/order.models';
 })
 export class Ordine implements OnInit{
 
-  listaordini: Order[]= []
+  listaordini: Order[]= [];
+  errorMsg='';
   
 
   constructor(private cartservice: CartService, private orderservice: OrderService){}
@@ -35,7 +36,7 @@ export class Ordine implements OnInit{
               console.log('ORDINI:', data);
             },
             error: err => {
-              console.error('Errore nel caricamento carrello:', err);
+                  console.log(err.error.message);
             }
           });
 

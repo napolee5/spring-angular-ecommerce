@@ -56,5 +56,9 @@
 
     </div>
 
+    <div *ngIf="toastservice.toastVisible" class="toast">
+        {{ toastservice.toastMessage }}
+    </div>
+
 
 </div>

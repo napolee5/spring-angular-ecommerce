@@ -9,6 +9,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { Footer } from "../footer/footer";
+import { ToastService } from '../service/toast-service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ import { Footer } from "../footer/footer";
 })
 export class Home implements OnInit {
 
-  constructor(private productservice: Productservice, private cartservice: CartService, private authservice: AuthService, private router: Router) {}
+  constructor(private productservice: Productservice, private cartservice: CartService, 
+    private authservice: AuthService, private router: Router,  public toastService: ToastService) {}
 
   immagini = [
     "assets/limoniCanva.png",
@@ -79,7 +81,7 @@ export class Home implements OnInit {
 
       if(data.length === 0){
 
-        this.showToast(
+        this.toastService.showToast(
             'Nessun prodotto trovato'
         );
       }
@@ -89,7 +91,7 @@ export class Home implements OnInit {
 
       console.error(err);
 
-      this.showToast(
+      this.toastService.showToast(
           'Errore durante la ricerca'
       );
     }
@@ -135,14 +137,14 @@ export class Home implements OnInit {
 
       next: () => {
 
-        this.showToast('Aggiunto al carrello');
+       this.toastService.showToast('Aggiunto al carrello');
       },
 
       error: (err) => {
 
         console.error(err);
 
-        this.showToast(err.error.message);
+        this.toastService.showToast(err.error.message);
       }
     });
 
@@ -152,21 +154,4 @@ export class Home implements OnInit {
   }
 }
 
-
-    toastVisible=false
-    toastMessage=''
-    private toastTimeout: any;
-
-    showToast(message: string){
-      this.toastMessage=message;
-      this.toastVisible=true;
-
-      if (this.toastTimeout) {
-      clearTimeout(this.toastTimeout);
-      }
-
-    this.toastTimeout = setTimeout(() => {
-      this.toastVisible = false;
-    }, 2000);
-    }
   }
