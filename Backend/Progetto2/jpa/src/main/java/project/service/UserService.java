@@ -23,24 +23,15 @@ import java.util.*;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final CartRepository cartRepository;
-    private final OrderRepository orderRepository;
     private final UserMapper userMapper;
     private final OrderMapper orderMapper;
-    private final OrderItemMapper orderItemMapper;
 
     public UserService(UserRepository userRepository,
-                       CartRepository cartRepository,
-                       OrderRepository orderRepository,
                        UserMapper userMapper,
-                       OrderMapper orderMapper,
-                       OrderItemMapper orderItemMapper) {
+                       OrderMapper orderMapper) {
         this.userRepository = userRepository;
-        this.cartRepository = cartRepository;
-        this.orderRepository = orderRepository;
         this.userMapper = userMapper;
         this.orderMapper = orderMapper;
-        this.orderItemMapper = orderItemMapper;
     }
 
     @Transactional
@@ -63,31 +54,6 @@ public class UserService {
         );
 
         return dto;
-    }
-
-    public List<Order> findOrderById(long id){
-        return orderRepository.findAllByUser_id(id);
-    }
-
-    public Set<OrderDTO> findAllOrder(UserDTO userDTO){
-        User user = userRepository.findByEmail(userDTO.getEmail())
-                .orElseThrow(() -> new UserNotFoundException(userDTO.getEmail()));
-
-        return new HashSet<>(
-                orderMapper.toDTOList(new ArrayList<>(user.getListOrder()))
-        );
-    }
-
-    public List<OrderItemDTO> findCart(UserDTO userDTO){
-        User user = userRepository.findByEmail(userDTO.getEmail())
-                .orElseThrow(() -> new UserNotFoundException(userDTO.getEmail()));
-
-        return orderItemMapper.toDTOList(user.getCart().getItems());
-    }
-
-    public UserDetails loadUserByUsername(String email){
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(email));
     }
 
     public List<UserDTO> findAllUsers(){
