@@ -46,7 +46,7 @@ public class CartService {
         User user = (User) authentication.getPrincipal();
         return cartRepository.findByUser_id(user.getId()).orElseThrow(() -> new CartNotFoundException());
     }
-    // ✅ NUOVO METODO DTO
+    
     public CartDTO getCartDTO(Authentication authentication){
         return cartMapper.toDTO(getCart(authentication));
     }
